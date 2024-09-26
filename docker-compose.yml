@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    # command: uvicorn ./app/app.main:app --host 0.0.0.0 --port 8000 --reload
+    env_file:
+      - .env
+    ports:
+      - '8000:80'
+    expose:
+      - '80'
+    volumes:
+      - ./backend/app:/app
+    networks:
+      - ekyc
+
+networks:
+  ekyc:
+    driver: bridge
